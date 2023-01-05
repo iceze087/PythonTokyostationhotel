@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="testjs"></p>
+    <img src="../static/the_tokyo_station_hotel.jpg" alt="">
+    <h1 class="header">Welcome to index</h1>
+
+    <!-- แสดงข้อมูลจาก object -->
+    <p>{{profile.name}} {{profile.age}} {{profile.gfname}}</p>
+
+    <!-- Jinja2 if elif else endif -->
+    {% if profile.name == "suttikaet" %}
+    <h1>this's your Full name 🎇</h1>
+    {% elif profile.name == "ice" %}
+    <h1>this's your Nickname 🎇</h1>
+    {% else %}
+    <h1>it's not YOUR FUCKING NAME (┬┬﹏┬┬)</h1>
+    {% endif %}
+
+    <!-- Jinja2 For loop through array -->
+    {% for item in skill %}
+    <ul>
+        <li>{{item}}</li>
+    </ul>
+    {% endfor %}
+
+    <a href="{{url_for('static',filename='the_tokyo_station_hotel.jpg')}}">ดูรูปภาพ</a>
+
+    <a href="/">home</a>
+    <a href="/profile/suttikaet/chanya">profile</a>
+
+    <div class="forminput">
+        <form action="{{url_for('inputname')}}" method="get">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Lastname</label>
+                <input type="text" class="form-control" name="lastname" id="lastname">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <div class="forminput">
+        <form action="{{url_for('inputgf')}}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">GFName</label>
+                <input type="text" class="form-control" name="GFname" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">GFLastname</label>
+                <input type="text" class="form-control" name="GFlastname">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    
+    <script src="{{url_for('static', filename='index_js.js')}}"></script>
+</body>
+
+</html>

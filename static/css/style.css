@@ -1,0 +1,147 @@
+/* Add Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,500&display=swap');
+/* All Class Using Same Class */
+:root{
+    /* Define Variable */
+       --Accent : #0b3f7b; /* Button Color */
+       --maincolor : #1F74D8;
+       --AccentHover : #769FD0; /*Mouse Hover --> light */
+       --Dark60 : rgba(68, 90 ,139, 0.6); /* 0.6=60% */
+       --Light : #FFFFFF;
+       --Transition : all 0.3s ease 0s /* Define Delay Time */
+   }
+   /* All section */
+
+*{
+    /* Clear margin and padding */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%; /* Fixed Height Using Scroolbar*/
+    overflow: auto;
+}
+body{
+    background-image: url("../images/Background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+}
+a { 
+    text-decoration: none; 
+}
+.bgnav{
+    display: flex;
+    align-items: center;
+   
+    background-image: url("../images/Logo_BG.svg");
+    padding: auto;
+}
+.logo{
+    padding-top: 3%;
+    padding-left: 2%;
+    padding-left: 5%;
+}
+.nav-item{
+    float: left;
+}
+.checkreserve{
+    display: flex;
+}
+.header_links{
+    margin-left: 28%;
+}
+.nava{
+    color: #FFFFFF;
+    padding: 8px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+}
+.check{
+    color: #000;
+    background-color: #FFE033;
+    padding: 8px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+    margin-left: 10px;
+}
+.logo_content{
+    margin-top: 5%;
+    align-items: center;
+    text-align: center;
+}
+.content_text{
+    margin-top: 5%;
+    color: #FFFFFF;
+    font-size: 2rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+    text-align: center;
+}
+.botton{
+    padding-bottom: 5%;
+}
+.form_input{
+    width: 100%;
+    background-image: url("../images/Logo_BG.svg");
+	position: fixed;
+	bottom: 0;
+}
+.header_input{
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: auto;
+    transition: var(--Transition);
+    font-family: "Kanit";
+}
+
+.input_data{
+    display: flex;
+    margin-left: 160px;
+
+}
+.input_data input{
+    width: 300px;
+    height: 40px;
+    margin-left: 0px;
+    margin-right: 85px;
+}
+.input_data select{
+    margin-right: 50px;
+}
+.Submitindex{
+    margin-left: 50%;
+    color: #000;
+    background-color: #FFE033;
+    width: 20%;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+}
+
+/* Style for search_room */
+.header_select{
+    background-image: url("../images/Select_room_header.png");
+    display: flex;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+}
+.roomselect{
+    font-size: 1rem;
+    font-weight: 400;
+    transition: var(--Transition);
+    font-family: "Kanit";
+}

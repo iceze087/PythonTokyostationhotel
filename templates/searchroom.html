@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <title>The Tokyo Station Hotel</title>
+    <link rel="stylesheet" href="../static/css/searchroom.css">
+</head>
+
+<body>
+
+    <main>
+        <!--NAV BAR-->
+        <nav class="navbar navbar-expand-lg bg-black">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="../static/images/LOGO_RZ1.png" alt="Logo" height="70"
+                        class="d-inline-block align-text-top"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nava" href="/">หน้าแรก</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nava" href="/gallery">คลังภาพ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nava" href="/travel">สถานที่ท่องเที่ยวใกล้เคียง</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nava" href="/contact">ติดต่อเรา</a>
+                        </li>
+
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="กรอกรหัสการจองของท่าน"
+                            aria-label="Search">
+                        <button class="btn btn-outline-warning" type="submit">ตรวจสอบการจอง</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- subheader -->
+        <div class="subheader">
+            <div class="row" style="margin-left: auto; margin-right: 3%;">
+                <div class="col">
+                    <p id="checkin"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cardcontent">
+            <div class="row">
+                {% for item in roomdata %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <!-- Content section -->
+                    <div class="card text-bg-dark mb-3" style="width: 18rem; margin-right: 5%;">
+                        <img src="{{item.room_image}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.room_number}}</h5>
+                            <p class="card-text">{{item.room_detail}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">ราคาห้อง : {{item.room_price}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary" name="{{item.room_number}}"
+                                onclick="showroomprice('{{item.room_number}}','{{item.room_detail}}','{{item.room_price}}')">เลือกห้องนี้</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="roomcalculate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">เลขที่ห้อง : <a id="roomnumber"></a></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  onclick="cleardata()"></button>
+                </div>
+                <div class="modal-body">
+                    รายละเอียดห้อง : <a id="roomdetail"></a> <br>
+                    ราคาห้อง : <a id="roomprice"></a>
+                    <p>ราคานี้สำหรับผู้ใหญ่สองท่าน หากมากกว่านั้นโปรดระบุด้านล่าง</p>
+                    <p>ผู้ใหญ่ เพิ่มคนละ 300 บาท</p>
+                    <input type="number" class="form-control" id="adultprice" aria-describedby="basic-addon3"
+                        onchange="peopleprice()">
+                    <p>เด็ก เพิ่มคนละ 100 บาท</p>
+                    <input type="number" class="form-control" id="kidprice" aria-describedby="basic-addon3"
+                        onchange="peopleprice()">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="cleardata()">ยกเลิก</button>
+                    <button type="button" class="btn btn-primary" onclick="saveroom()">จองห้อง</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/javascript/searchroom.js"></script>
+</body>
+
+</html>
