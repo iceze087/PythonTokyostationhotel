@@ -13,11 +13,11 @@ function showroomprice(room_number,room_detail,room_price){
     // console.log(room_number ,room_detail , room_price)
     localStorage.setItem("roomid" , room_number);
     localStorage.setItem("roomprice", room_price);
-    localStorage.setItem("roomprice_static", room_price);
+    // localStorage.setItem("roomprice_static", room_price);
     roomprice = localStorage.getItem("roomprice")
     document.getElementById('roomnumber').innerHTML = room_number;
     document.getElementById('roomdetail').innerHTML = room_detail;
-    document.getElementById('roomprice').innerHTML = roomprice;
+    document.getElementById('roomprice').innerHTML = 'ราคาห้อง : ' + roomprice;
     myModal.show()
 }
 
@@ -29,7 +29,7 @@ function peopleprice(){
         defaultprice = parseInt(getprice)
         console.log(defaultprice)
         sumadult = ((300 * adult) + (100 * kid)) + defaultprice;
-        document.getElementById('roomprice').innerHTML = sumadult;
+        document.getElementById('roomprice').innerHTML = 'ราคาห้อง : ' + sumadult;
         // localStorage.setItem("roomprice", sumadult);
     }
     else{
@@ -40,13 +40,12 @@ function peopleprice(){
 
 function cleardata(){
     localStorage.removeItem("adultcal")
-    localStorage.removeItem("roomprice_static")
+    // localStorage.removeItem("roomprice_static")
     sumadult = 0;
 }
 
 function saveroom(){
     if(sumadult == undefined){
-
     }
     else if(sumadult != undefined){
         localStorage.setItem('roomprice', sumadult)

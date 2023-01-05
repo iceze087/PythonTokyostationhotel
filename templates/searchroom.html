@@ -20,7 +20,7 @@
         <!--NAV BAR-->
         <nav class="navbar navbar-expand-lg bg-black">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="../static/images/LOGO_RZ1.png" alt="Logo" height="70"
+                <a class="navbar-brand" href="/"><img src="../static/images/LOGO_RZ1.png" alt="Logo" height="70"
                         class="d-inline-block align-text-top"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -96,16 +96,16 @@
                 </div>
                 <div class="modal-body">
                     รายละเอียดห้อง : <a id="roomdetail"></a> <br>
-                    ราคาห้อง : <a id="roomprice"></a>
-                    <p>ราคานี้สำหรับผู้ใหญ่สองท่าน หากมากกว่านั้นโปรดระบุด้านล่าง</p>
                     <p>ผู้ใหญ่ เพิ่มคนละ 300 บาท</p>
                     <input type="number" class="form-control" id="adultprice" aria-describedby="basic-addon3"
                         onchange="peopleprice()">
                     <p>เด็ก เพิ่มคนละ 100 บาท</p>
                     <input type="number" class="form-control" id="kidprice" aria-describedby="basic-addon3"
                         onchange="peopleprice()">
+                    <p class="caution">ราคานี้สำหรับผู้ใหญ่สองท่าน หากมากกว่านั้นโปรดระบุ</p>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" id="pricetag" class="btn btn-warning"><a id="roomprice"></a></button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         onclick="cleardata()">ยกเลิก</button>
                     <button type="button" class="btn btn-primary" onclick="saveroom()">จองห้อง</button>
