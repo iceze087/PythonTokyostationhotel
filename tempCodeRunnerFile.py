@@ -1,1 +1,1 @@
-selectlocation
+/selectamphures

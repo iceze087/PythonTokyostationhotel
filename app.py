@@ -48,21 +48,29 @@ def searchroom():
         return render_template("searchroom.html", roomdata = room)
     return render_template("searchroom.html")
 
-@app.route('/selectlocation')
-def selectlocation():
+@app.route('/selectprovinces')
+def selectprovinces():
     selectprovinces = mydb.cursor(dictionary=True)
     selectprovinces.execute('SELECT id , name_th FROM provinces')
     provincesdata = selectprovinces.fetchall()
     # ------------------------------------------------
+    return make_response(jsonify(provincesdata),200)
+
+@app.route('/selectamphures')
+def selectamphures():
     selectamphures = mydb.cursor(dictionary=True)
     selectamphures.execute('SELECT id , name_th , province_id FROM amphures')
     amphuresdata = selectamphures.fetchall()
     # ------------------------------------------------
+    return make_response(jsonify(amphuresdata),200)
+
+@app.route('/selectdistricts')
+def selectdistricts():
     selectdistricts = mydb.cursor(dictionary=True)
     selectdistricts.execute('SELECT id , name_th , amphure_id FROM districts;')
     districtsdata = selectdistricts.fetchall()
     # ------------------------------------------------
-    return make_response(jsonify(provincesdata , amphuresdata ,districtsdata),200)
+    return make_response(jsonify(districtsdata),200)
 
 @app.route('/inputdata')
 def inputdata():
