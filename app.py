@@ -67,7 +67,7 @@ def selectamphures():
 @app.route('/selectdistricts')
 def selectdistricts():
     selectdistricts = mydb.cursor(dictionary=True)
-    selectdistricts.execute('SELECT id , name_th , amphure_id FROM districts;')
+    selectdistricts.execute('SELECT id , name_th , zip_code , amphure_id FROM districts;')
     districtsdata = selectdistricts.fetchall()
     # ------------------------------------------------
     return make_response(jsonify(districtsdata),200)
@@ -75,6 +75,24 @@ def selectdistricts():
 @app.route('/inputdata')
 def inputdata():
     return render_template('inputreservedata.html')
+
+@app.route('/reserveroom' ,  methods=['POST'])
+def reserveroom():
+    roomid = request.form['roomid']
+    roomprice = request.form['roomprice']
+    reserve_checkindate = request.form['reserve_checkindate']
+    reserve_checkoutdate = request.form['reserve_checkoutdate']
+    customer_name = request.form['customer_name']
+    customer_lastmane = request.form['customer_lastmane']
+    customer_number = request.form['customer_number']
+    customer_email = request.form['customer_email']
+    resident = request.form['resident']
+    provinces = request.form['provinces']
+    amphures = request.form['amphures']
+    districts = request.form['districts']
+    zip_code = request.form['zip_code']
+    print(roomid , roomprice , reserve_checkindate ,reserve_checkoutdate, customer_name , customer_lastmane ,customer_number , customer_email , resident , provinces, districts ,amphures ,zip_code)
+    return render_template('payment.html')
 
 # @app.route("/")
 # def index():

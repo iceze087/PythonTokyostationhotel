@@ -55,19 +55,23 @@
             <div class="col col-lg-10">
                 <h1>กรอกข้อมูลสำหรับการจอง</h1>
                 <label for="">ข้อมูลติดต่อ</label>
-                <form action="">
+                <form action="{{url_for('reserveroom')}}" method="post">
+                    <input type="number" name="roomid" id="roomid" hidden>
+                    <input type="number" name="roomprice" id="roomprice" hidden>
+                    <input type="date" name="reserve_checkindate" id="reserve_checkindate" hidden>
+                    <input type="date" name="reserve_checkoutdate" id="reserve_checkoutdate" hidden>
                     <div class="row">
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ชื่อ</span>
-                            <input type="text" class="form-control" placeholder="กรอกชื่อ" aria-label="Username"
+                            <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="กรอกชื่อ" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">นามสกุล</span>
-                            <input type="text" class="form-control" placeholder="กรอกนามสกุล" aria-label="Username"
+                            <input type="text" class="form-control" name="customer_lastmane" id="customer_lastmane" placeholder="กรอกนามสกุล" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
@@ -76,14 +80,14 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">เบอร์โทรศัพท์</span>
-                            <input type="number" class="form-control" placeholder="กรอกเบอร์โทรศัพท์" aria-label="Username"
+                            <input type="number" class="form-control" name="customer_number" id="customer_number" placeholder="กรอกเบอร์โทรศัพท์" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Email ติดต่อ</span>
-                            <input type="email" class="form-control" placeholder="กรอกEmail" aria-label="Username"
+                            <input type="email" class="form-control" name="customer_email" id="customer_email" placeholder="กรอกEmail" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
@@ -93,7 +97,7 @@
                     <div class="col-12 col-sm-12 col-lg-12">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ที่อยู่ปัจจุบัน</span>
-                            <input type="text" class="form-control" placeholder="กรอกชื่อ" aria-label="Username"
+                            <input type="text" class="form-control" name="resident" id="resident" placeholder="กรอกชื่อ" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
@@ -102,14 +106,14 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">จังหวัด</span>
-                            <select class="form-select" id="province" aria-label="Default select example" onchange="setamphures(value)">
+                            <select class="form-select" id="province" name="provinces" aria-label="Default select example" onchange="setamphures(value)">
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">อำเภอ</span>
-                            <select class="form-select" id="amphures" aria-label="Default select example">
+                            <select class="form-select" id="amphures" name="amphures" aria-label="Default select example" onchange="settumbon(value)">
                             </select>
                         </div>
                     </div>
@@ -118,18 +122,14 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ตำบล</span>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>เลือกตำบล</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" id="tumbon" name="districts" aria-label="Default select example" onchange="setpostcode(value)">
                               </select>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">รหัสไปรษณีย์</span>
-                            <input type="email" class="form-control" placeholder="กรอกEmail" aria-label="Username"
+                            <input type="number" class="form-control" name="zip_code" id="postcode" placeholder="กรอกรหัสไปรษณีย์" aria-label="Username"
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
