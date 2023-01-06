@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,flash
+from flask import Flask, render_template,request,flash, jsonify , make_response
 from flask_cors import CORS
 import mysql.connector
 # Create Server
@@ -47,6 +47,26 @@ def searchroom():
         print(room)
         return render_template("searchroom.html", roomdata = room)
     return render_template("searchroom.html")
+
+@app.route('/selectlocation')
+def selectlocation():
+    selectprovinces = mydb.cursor(dictionary=True)
+    selectprovinces.execute('SELECT id , name_th FROM provinces')
+    provincesdata = selectprovinces.fetchall()
+    # ------------------------------------------------
+    selectamphures = mydb.cursor(dictionary=True)
+    selectamphures.execute('SELECT id , name_th , province_id FROM amphures')
+    amphuresdata = selectamphures.fetchall()
+    # ------------------------------------------------
+    selectdistricts = mydb.cursor(dictionary=True)
+    selectdistricts.execute('SELECT id , name_th , amphure_id FROM districts;')
+    districtsdata = selectdistricts.fetchall()
+    # ------------------------------------------------
+    return make_response(jsonify(provincesdata , amphuresdata ,districtsdata),200)
+
+@app.route('/inputdata')
+def inputdata():
+    return render_template('inputreservedata.html')
 
 # @app.route("/")
 # def index():

@@ -46,8 +46,10 @@ function cleardata(){
 
 function saveroom(){
     if(sumadult == undefined){
+        window.location.href = "/inputdata";
     }
     else if(sumadult != undefined){
         localStorage.setItem('roomprice', sumadult)
+        window.location.href = "/inputdata";
     }
 }
