@@ -3,6 +3,7 @@ from flask_cors import CORS
 import mysql.connector
 # Create Server
 app = Flask(__name__)
+CORS(app)
 
 # host = 'localhost'
 # user = 'root'
