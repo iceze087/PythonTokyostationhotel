@@ -28,7 +28,6 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
-    opacity:1;
 }
 a { 
     text-decoration: none; 
@@ -61,55 +60,4 @@ a {
     font-weight: 400;
     transition: var(--Transition);
     font-family: "Kanit";
-}
-.check{
-    color: #000;
-    background-color: #FFE033;
-    padding: 8px;
-    font-size: 1.5rem;
-    font-weight: 400;
-    transition: var(--Transition);
-    font-family: "Kanit";
-    margin-left: 10px;
-}
-.logo_content{
-    margin-top: 5%;
-    align-items: center;
-    text-align: center;
-}
-.content_text{
-    margin-top: 5%;
-    color: #FFFFFF;
-    font-size: 2rem;
-    font-weight: 400;
-    transition: var(--Transition);
-    font-family: "Kanit";
-    text-align: center;
-}
-.cardcontent{
-    margin-left: 2%;
-    margin-left: 2%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-.subheader{
-    display: flex;
-    font-size: 1.3rem;
-    font-family: "Kanit";
-    text-align: center;
-    background-color: #1F74D8;
-}
-#forminput{
-    margin-top: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
-}
-#submit{
-    width: 100%;
-}
-#showprice{
-    width: 100%;
-}
-#cardheader{
-    background-color: white;
 }

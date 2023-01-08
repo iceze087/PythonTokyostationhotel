@@ -3,6 +3,17 @@ document.getElementById('roomprice').value = localStorage.getItem('roomprice')
 document.getElementById('reserve_checkindate').value = localStorage.getItem('checkindate')
 document.getElementById('reserve_checkoutdate').value = localStorage.getItem('checkoutdate')
 
+// carddata
+var roomid = localStorage.getItem('roomid')
+var chackin = localStorage.getItem('checkindate')
+var chackout = localStorage.getItem('checkoutdate')
+var roomtype = localStorage.getItem('roomtype')
+var roomprice = localStorage.getItem('roomprice')
+document.getElementById('showroomid').innerHTML = 'เลขที่ห้อง : ' + roomid;
+document.getElementById('checkin-out').innerHTML = chackin + ' - ' + chackout;
+document.getElementById('roomtype').innerHTML = 'ประเภทห้อง : ' + roomtype;
+document.getElementById('showroomprice').innerHTML = roomprice + ' บาท'
+
 var requestOptions = {
   method: 'GET',
   redirect: 'follow'
@@ -102,4 +113,9 @@ function showpostcode(selectombon){
       })
     })
     .catch(error => console.log('error', error));
+}
+
+function savename(){
+  namesave = document.getElementById('customer_name').value;
+  localStorage.setItem('username' , namesave)
 }

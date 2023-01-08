@@ -17,10 +17,29 @@ paypal.Buttons({
         console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
         const transaction = orderData.purchase_units[0].payments.captures[0];
         alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-        // When ready to go live, remove the alert and show a success message within this page. For example:
-        // const element = document.getElementById('paypal-button-container');
-        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-        // Or go to another URL:  actions.redirect('thank_you.html');
+        
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+          var customername = localStorage.getItem('username')
+          var name = JSON.stringify([
+              customername
+          ]);
+
+          var updatepayment = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: name,
+            redirect: 'follow'
+          };
+
+          fetch("http://127.0.0.1:5000/updatepayment", updatepayment)
+            .then(response => response.text())
+            .then(result => {
+              console.log(result)
+              window.location.href = 'thankforpay.html';
+            })
+            .catch(error => console.log('error', error));
+        
       });
     }
   }).render('#paypal-button-container');

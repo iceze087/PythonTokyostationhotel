@@ -65,7 +65,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ชื่อ</span>
                             <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="กรอกชื่อ" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" onkeyup="savename()">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
@@ -138,16 +138,14 @@
                 </form>
             </div>
             <div class="col d-none d-sm-none d-md-block col-md-0 col-lg-2">
-                <div class="card" style="width: 18rem;">
+                <div class="card text-bg-warning" style="width: 18rem;">
+                    <div class="card-header" id="cardheader"><h4 id="showroomid"></h4></div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <p class="card-text" id="checkin-out" for=""></p>
+                        <p class="card-text" id="roomtype"></p>
+                        <button type="button" class="btn btn-light" id="showprice"><label for="" id="showroomprice"></label></button>
                     </div>
-                </div>
+                  </div>
             </div>
         </div>
     </div>

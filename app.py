@@ -1,19 +1,20 @@
 from flask import Flask, render_template,request,flash, jsonify , make_response
 from flask_cors import CORS
 import mysql.connector
+import random
 # Create Server
 app = Flask(__name__)
 CORS(app)
 
-# host = 'localhost'
-# user = 'root'
-# password = ''
-# db = 'tokyostationhotel'
-
-host = '147.50.231.21'
-user = 'iceze087'
-password = 'Iceze_0871919941'
+host = 'localhost'
+user = 'root'
+password = ''
 db = 'tokyostationhotel'
+
+# host = '147.50.231.21'
+# user = 'iceze087'
+# password = 'Iceze_0871919941'
+# db = 'tokyostationhotel'
 
 mydb = mysql.connector.connect(host=host , user=user , password=password ,db=db)
 
@@ -79,10 +80,11 @@ def inputdata():
 
 @app.route('/reserveroom' ,  methods=['POST'])
 def reserveroom():
-    roomid = request.form['roomid']
-    roomprice = request.form['roomprice']
+    print(random.randint(0,10000))
     reserve_checkindate = request.form['reserve_checkindate']
     reserve_checkoutdate = request.form['reserve_checkoutdate']
+    reserve_status = 1
+    paymentstatus= 0
     customer_name = request.form['customer_name']
     customer_lastmane = request.form['customer_lastmane']
     customer_number = request.form['customer_number']
@@ -92,8 +94,27 @@ def reserveroom():
     amphures = request.form['amphures']
     districts = request.form['districts']
     zip_code = request.form['zip_code']
-    print(roomid , roomprice , reserve_checkindate ,reserve_checkoutdate, customer_name , customer_lastmane ,customer_number , customer_email , resident , provinces, districts ,amphures ,zip_code)
-    return render_template('payment.html')
+    roomid = request.form['roomid']
+    roomprice = request.form['roomprice']
+    
+    insertreserve = mydb.cursor(dictionary=True)
+    insertreserve.execute('INSERT INTO room_reserve (reserve_id, reserve_checkindate, reserve_checkoutdate, reserve_status, paymentstatus, customer_name, customer_lastmane, customer_number, customer_email, resident, provinces, amphures, districts, zip_code, room_id, roomprice) VALUES (NULL, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s , %s);', (reserve_checkindate , reserve_checkoutdate , reserve_status , paymentstatus , customer_name , customer_lastmane , customer_number , customer_email , resident , provinces , amphures , districts , zip_code , roomid , roomprice))
+    mydb.commit()
+    cusname = [customer_name]
+    selectroom_reserve = mydb.cursor(dictionary=True)
+    selectroom_reserve.execute('select reserve_id , reserve_checkindate , reserve_checkoutdate , customer_name , customer_lastmane , room_id , roomprice from room_reserve where customer_name =  %s', cusname)
+    getreservedata = selectroom_reserve.fetchall()
+    print(getreservedata)
+    return render_template('payment.html' , reservedata = getreservedata)
+
+@app.route("/updatepayment", methods = ['PUT'])
+def updatepayment():
+    payname = request.get_json()
+    print(payname)
+    updatepay = mydb.cursor(dictionary=True)
+    updatepay.execute('update room_reserve set paymentstatus = 1 where customer_name = %s',payname)
+    mydb.commit()
+    return render_template('thankforpay.html')
 
 # @app.route("/")
 # def index():
