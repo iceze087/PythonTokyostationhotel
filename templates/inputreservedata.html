@@ -1,60 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <title>The Tokyo Station Hotel</title>
-    <link rel="stylesheet" href="../static/css/inputreserve.css">
-    <title>Document</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg bg-black">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="../static/images/LOGO_RZ1.png" alt="Logo" height="70"
-                    class="d-inline-block align-text-top"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nava" href="/">หน้าแรก</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nava" href="/gallery">คลังภาพ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nava" href="/travel">สถานที่ท่องเที่ยวใกล้เคียง</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nava" href="/contact">ติดต่อเรา</a>
-                    </li>
-
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="กรอกรหัสการจองของท่าน"
-                        aria-label="Search">
-                    <button class="btn btn-outline-warning" type="submit">ตรวจสอบการจอง</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+{% extends "base.html" %}
+{% block content %}
 
     <div class="container text-center" id="forminput">
         <div class="row">
-            <div class="col col-lg-10">
+            <div class="col col-lg-10" id="inputinfo">
                 <h1>กรอกข้อมูลสำหรับการจอง</h1>
-                <label for="">ข้อมูลติดต่อ</label>
+                <label for="" class="formheader">ข้อมูลติดต่อ</label>
                 <form action="{{url_for('reserveroom')}}" method="post">
                     <input type="number" name="roomid" id="roomid" hidden>
                     <input type="number" name="roomprice" id="roomprice" hidden>
@@ -65,14 +16,14 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ชื่อ</span>
                             <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="กรอกชื่อ" aria-label="Username"
-                                aria-describedby="basic-addon1" onkeyup="savename()">
+                                aria-describedby="basic-addon1" onkeyup="savename()" required>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">นามสกุล</span>
                             <input type="text" class="form-control" name="customer_lastmane" id="customer_lastmane" placeholder="กรอกนามสกุล" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                 </div>
@@ -81,24 +32,24 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">เบอร์โทรศัพท์</span>
                             <input type="number" class="form-control" name="customer_number" id="customer_number" placeholder="กรอกเบอร์โทรศัพท์" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Email ติดต่อ</span>
                             <input type="email" class="form-control" name="customer_email" id="customer_email" placeholder="กรอกEmail" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                 </div>
-                <label for="">ที่อยู่</label>
+                <label for="" class="formheader">ที่อยู่</label>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-lg-12">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ที่อยู่ปัจจุบัน</span>
                             <input type="text" class="form-control" name="resident" id="resident" placeholder="กรอกชื่อ" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                 </div>
@@ -106,14 +57,14 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">จังหวัด</span>
-                            <select class="form-select" id="province" name="provinces" aria-label="Default select example" onchange="setamphures(value)">
+                            <select class="form-select" id="province" name="provinces" aria-label="Default select example" onchange="setamphures(value)" required>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">อำเภอ</span>
-                            <select class="form-select" id="amphures" name="amphures" aria-label="Default select example" onchange="settumbon(value)">
+                            <select class="form-select" id="amphures" name="amphures" aria-label="Default select example" onchange="settumbon(value)" required>
                             </select>
                         </div>
                     </div>
@@ -122,7 +73,7 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ตำบล</span>
-                            <select class="form-select" id="tumbon" name="districts" aria-label="Default select example" onchange="setpostcode(value)">
+                            <select class="form-select" id="tumbon" name="districts" aria-label="Default select example" onchange="setpostcode(value)" required>
                               </select>
                         </div>
                     </div>
@@ -130,7 +81,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">รหัสไปรษณีย์</span>
                             <input type="number" class="form-control" name="zip_code" id="postcode" placeholder="กรอกรหัสไปรษณีย์" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                                aria-describedby="basic-addon1" required>
                         </div>
                     </div>
                 </div>
@@ -151,6 +102,4 @@
     </div>
 
     <script src="../static/javascript/inputreserve.js"></script>
-</body>
-
-</html>
+{% endblock %}

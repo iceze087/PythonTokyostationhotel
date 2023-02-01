@@ -1,10 +1,17 @@
-from flask import Flask, render_template,request,flash, jsonify , make_response
+import os
+from flask import Flask, render_template, request ,flash, jsonify , make_response , redirect , url_for
 from flask_cors import CORS
 import mysql.connector
-import random
+from werkzeug.utils import secure_filename
+
 # Create Server
 app = Flask(__name__)
 CORS(app)
+
+# upload file
+UPLOAD_FOLDER = 'static/upload'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 host = 'localhost'
 user = 'root'
@@ -29,14 +36,15 @@ def searchroom():
     checkout = request.form['reserve_checkoutdate']
     value = (checkin, checkout)
     searchroom.execute("select *from room_reserve where reserve_checkindate = %s and reserve_checkoutdate = %s" , value)
-    print(value)
+    # print(value)
     searchresult = searchroom.fetchall()
-    print(searchresult)
+    # print(searchresult)
     if searchresult == []:
         print('is empty')
         selectall = mydb.cursor(dictionary=True)
         selectall.execute("select *from room")
         room = selectall.fetchall()
+        print(room)
         return render_template("searchroom.html", roomdata = room)
     elif searchresult != []:
         print('not empty room id = ' )
@@ -46,7 +54,7 @@ def searchroom():
         roomid = [roomnot[0]['room_id']]
         selectnotavali.execute("select * from room where room_id != %s" , roomid)
         room = selectnotavali.fetchall()
-        print(room)
+        # print(room)
         return render_template("searchroom.html", roomdata = room)
     return render_template("searchroom.html")
 
@@ -80,7 +88,6 @@ def inputdata():
 
 @app.route('/reserveroom' ,  methods=['POST'])
 def reserveroom():
-    print(random.randint(0,10000))
     reserve_checkindate = request.form['reserve_checkindate']
     reserve_checkoutdate = request.form['reserve_checkoutdate']
     reserve_status = 1
@@ -105,16 +112,48 @@ def reserveroom():
     selectroom_reserve.execute('select reserve_id , reserve_checkindate , reserve_checkoutdate , customer_name , customer_lastmane , room_id , roomprice from room_reserve where customer_name =  %s', cusname)
     getreservedata = selectroom_reserve.fetchall()
     print(getreservedata)
-    return render_template('payment.html' , reservedata = getreservedata)
+    return render_template('payment.html' , reservedata = getreservedata[0])
 
 @app.route("/updatepayment", methods = ['PUT'])
 def updatepayment():
     payname = request.get_json()
-    print(payname)
+    # print(payname)
     updatepay = mydb.cursor(dictionary=True)
     updatepay.execute('update room_reserve set paymentstatus = 1 where customer_name = %s',payname)
     mydb.commit()
     return render_template('thankforpay.html')
+
+@app.route("/thankforpay")
+def thankforpay():
+    return render_template("thankforpay.html")
+
+# -------------------------- image upload --------------------------
+@app.route("/upload")
+def upload():
+    return render_template("6imageupload.html")
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route("/imgload", methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file', name=filename))
+    return render_template("6imageupload.html")
 
 # @app.route("/")
 # def index():

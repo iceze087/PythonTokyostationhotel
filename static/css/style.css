@@ -133,18 +133,76 @@ a {
 }
 
 /* Style for search_room */
-.header_select{
-    background-image: url("../images/Select_room_header.png");
-    display: flex;
+.content_text{
+    margin-top: 5%;
     color: #FFFFFF;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 400;
     transition: var(--Transition);
     font-family: "Kanit";
+    text-align: center;
 }
-.roomselect{
-    font-size: 1rem;
-    font-weight: 400;
-    transition: var(--Transition);
+.cardcontent{
+    margin-left: 2%;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.subheader{
+    display: flex;
+    font-size: 1.3rem;
     font-family: "Kanit";
+    text-align: center;
+    background-color: #1F74D8;
+}
+.caution{
+    color: red;
+    font-size: 0.8rem;
+}
+#pricetag{
+    margin-right: auto;
+}
+/* -----------------------input reserve ------------------ */
+#forminput{
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#inputinfo{
+    background-color: white;
+    padding: 2%;
+    border-radius: 25px;
+}
+.formheader{
+    font-size: 1.5rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+#submit{
+    width: 100%;
+}
+#showprice{
+    width: 100%;
+}
+#cardheader{
+    background-color: white;
+}
+/* payment */
+#paymentcontent{
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#paymentinfo{
+    background-color: white;
+    padding: 2%;
+    border-radius: 25px;
+    font-size: 1.2rem;
+}
+#pay{
+    margin-top: 2%;
+    background-color: white;
+    padding: 3%;
+    border-radius: 25px;
+    text-align: center;
 }

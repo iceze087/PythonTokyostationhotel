@@ -1,1 +1,1 @@
-/selectamphures
+render_template("6imageupload.html")
