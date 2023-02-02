@@ -3,7 +3,10 @@ from flask import Flask, render_template, request ,flash, jsonify , make_respons
 from flask_cors import CORS
 import mysql.connector
 from werkzeug.utils import secure_filename
-
+import base64
+from io import BytesIO
+from PIL import Image
+import io
 # Create Server
 app = Flask(__name__)
 CORS(app)
@@ -13,15 +16,15 @@ UPLOAD_FOLDER = 'static/upload'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-host = 'localhost'
-user = 'root'
-password = ''
-db = 'tokyostationhotel'
-
-# host = '147.50.231.21'
-# user = 'iceze087'
-# password = 'Iceze_0871919941'
+# host = 'localhost'
+# user = 'root'
+# password = ''
 # db = 'tokyostationhotel'
+
+host = '147.50.231.21'
+user = 'iceze087'
+password = 'Iceze_0871919941'
+db = 'tokyostationhotel'
 
 mydb = mysql.connector.connect(host=host , user=user , password=password ,db=db)
 
@@ -127,7 +130,7 @@ def updatepayment():
 def thankforpay():
     return render_template("thankforpay.html")
 
-# -------------------------- image upload --------------------------
+# -------------------------- image upload Example --------------------------
 @app.route("/upload")
 def upload():
     return render_template("6imageupload.html")
@@ -159,6 +162,32 @@ def upload_file():
             file2.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))
     return render_template("6imageupload.html")
+
+@app.route('/imgbase64' , methods=['POST'])
+def imgbase64():
+    data = request.get_json()
+    pic = data.get('pic')
+    # imgdata = base64.b64decode(pic)
+    size = (200, 150)
+    
+    imgdata = base64.b64decode(pic)
+    image = Image.open(BytesIO(imgdata), format="PNG")
+
+    image = image.resize(size, Image.ANTIALIAS)
+
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    resized_img_bytes = buffer.getvalue()
+
+    return base64.b64encode(resized_img_bytes).decode("utf-8")
+
+    response = {
+        "message": "success",
+        "pic" : pic
+    }
+    return make_response(jsonify(response),200)
+
+
 
 # @app.route("/")
 # def index():

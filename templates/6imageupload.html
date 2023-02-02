@@ -1,17 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <form method=post enctype=multipart/form-data>
+    <!-- Normal input -->
+    <!-- <form method=post enctype=multipart/form-data>
         <input type="file" name="p1" id="p1">
         <input type="file" name="p2" id="p2">
         <button type="submit">submit</button>
+    </form> -->
+
+    <!-- base64 input -->
+    <form action="">
+        <input type="file" id="image" name="image" onchange="convert64()">
+        <button type="button" onclick="sendtoapi()">SEND!!!</button>
     </form>
-    
+    <br>
+    <img src="" alt="" id="resimg">
+
+    <script>
+        var base64
+        function convert64() {
+            var filesSelected = document.getElementById("image").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+
+                var fileReader = new FileReader();
+
+                fileReader.onload = function (fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result;
+                    base64 = srcData
+                    console.log(base64)
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        }
+        function sendtoapi() {
+            var package = []
+
+            package.push({ pic: base64 })
+            const data = package[0]
+
+            // var myHeaders = {"Content-Type": "application/json"}
+            // var sendpackage = JSON.stringify(data);
+            // console.log(sendpackage)
+            // var requestpackge = {
+            //     method: 'POST',
+            //     headers: myHeaders,
+            //     body: sendpackage,
+            //     redirect: 'follow'
+            // };
+            // console.log(requestpackge)
+            fetch("http://127.0.0.1:5000/imgbase64", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById('resimg').src = result.pic;
+                })
+                .catch(error => {
+                    console.log("An error occurred.")
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 </body>
+
 </html>
